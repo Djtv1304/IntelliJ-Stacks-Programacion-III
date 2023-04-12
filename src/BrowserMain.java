@@ -8,7 +8,7 @@ public class BrowserMain {
             public void run() {
 
                 JFrame frame = new Browser();
-                frame.setSize(300,300);
+                frame.setSize(600,400);
                 frame.setLocationRelativeTo(null);
                 frame.setTitle("Browser");
                 frame.setVisible(true);

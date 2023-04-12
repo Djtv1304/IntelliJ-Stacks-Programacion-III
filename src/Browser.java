@@ -20,7 +20,7 @@ public class Browser extends JFrame {
         setContentPane(JpanelPrincipal);
 
         BackwardURL.push("Home");
-        textArea1.setText("Actualmente te encuentras en home");
+        textArea1.setText("Actualmente te encuentras en Home");
 
         enterButton.addActionListener(new ActionListener() {
             @Override
@@ -39,47 +39,55 @@ public class Browser extends JFrame {
 
                 textArea1.setText(actual);
 
-                textArea1.insert("\nImpresión de la pila (Backward): \n" + BackwardURL,actual.length());
+                textArea1.insert("\nImpresión de la pila (Backward): " + BackwardURL,actual.length());
 
+                forwardButton.setEnabled(false);
+                backwardButton.setEnabled(true);
+                jTextURL.setText("");
             }
         });
 
         backwardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String actual;
+                String actual = "";
                 ForwardURL.push(BackwardURL.pop());
+                forwardButton.setEnabled(true);
+
                 if (BackwardURL.isEmpty()) {
                     actual = "Actualmente te encuentras en "+ForwardURL.peek();
                     textArea1.setText(actual);
                     backwardButton.setEnabled(false);
-                    forwardButton.setEnabled(true);
-                }else {
+
+                } else if (BackwardURL.size() == 1) {
+                    backwardButton.setEnabled(false);
+                    textArea1.setText("\nActualmente te encuentras en Home");
+                } else {
                     actual = "Actualmente te encuentras en "+BackwardURL.peek();
                     textArea1.setText(actual);
                 }
 
-                textArea1.insert("\nImpresión de la pila (Backward): \n" + BackwardURL,actual.length());
+                textArea1.insert("\nImpresión de la pila (Backward): " + BackwardURL,actual.length());
             }
         });
 
         forwardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String actual;
+                String actual = "";
                 BackwardURL.push(ForwardURL.pop());
+                backwardButton.setEnabled(true);
                 if (ForwardURL.isEmpty()) {
-                    actual = "Actualmente te encuentras en "+BackwardURL.peek();
+                    actual = "Actualmente te encuentras en "+ BackwardURL.peek();
                     textArea1.setText(actual);
                     forwardButton.setEnabled(false);
-                    backwardButton.setEnabled(true);
                 }else {
-                    actual = "Actualmente te encuentras en "+ForwardURL.peek();
+                    actual = "Actualmente te encuentras en "+ BackwardURL.peek();
                     textArea1.setText(actual);
                 }
 
-                textArea1.insert("\nImpresión de la pila (Backward): \n" + BackwardURL,actual.length());
-                textArea1.insert("\nImpresión de la pila (Forward): \n" + ForwardURL,actual.length());
+                textArea1.insert("\nImpresión de la pila (Backward): " + BackwardURL,actual.length());
+                textArea1.insert("\nImpresión de la pila (Forward): " + ForwardURL,actual.length());
             }
         });
     }
